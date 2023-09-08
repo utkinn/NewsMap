@@ -6,3 +6,4 @@ riderModule.iml
 out/
 .idea/
 .vscode/
+.DS_Store
