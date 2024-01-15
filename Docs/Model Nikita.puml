@@ -1,0 +1,69 @@
+@startuml Model
+
+hide empty members
+
+package Model.Base {
+    class Model.Base.GeoLocation << (E,lightblue) entity >> {
+        + Guid Id
+    }
+    ' TODO
+}
+
+package Model.News {
+    ' Optimize location storage for efficient filtering
+    class NewsArticle << (E,lightblue) entity >> {
+        + Guid Id
+        + string Title
+        + string Content
+        + DateTimeOffset CreatedAt
+        + string? SourceLink
+        + GeoLocation? Location
+        + IDrawData? DrawData
+        + double Importance
+        + DateTimeOffset? StartTime
+        + DateTimeOffset? EndTime
+        + DateTimeOffset DisappearTime
+        + List<NewsArticleTag> Tags
+    }
+
+    NewsArticle *.. Model.Base.GeoLocation
+    NewsArticle *.. IDrawData
+    NewsArticleTag "*" ..o "*" NewsArticle
+
+    interface IDrawData {
+        + Guid Id
+    }
+
+    class GeoPoint {
+        + double Latitude
+        + double Longitude
+    }
+
+    class PointDrawData implements IDrawData {
+        + Guid Id
+        + GeoPoint Point
+    }
+
+    GeoPoint --* PointDrawData
+
+    class PathDrawData implements IDrawData {
+        + Guid Id
+        + List<GeoPoint> Points
+    }
+
+    GeoPoint --* "*" PathDrawData
+
+    class AreaDrawData implements IDrawData {
+        + Guid Id
+        + List<GeoPoint> Points
+    }
+
+    AreaDrawData *-- "*" GeoPoint
+
+    class NewsArticleTag << (E,lightblue) entity >> {
+        + Guid Id
+        + string Name
+    }
+}
+
+@enduml

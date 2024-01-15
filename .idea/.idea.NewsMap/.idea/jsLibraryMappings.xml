@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/@jest/environment/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/@jest/fake-timers/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/@jest/globals/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/@jest/test-result/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/@jest/test-sequencer/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/expect/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/jest-changed-files/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/jest-environment-node/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/jest-leak-detector/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/jest-mock/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/jest-resolve-dependencies/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/jest/node_modules" />
+    <excludedPredefinedLibrary name="NewsMap/Frontend/node_modules/v8-to-istanbul/node_modules" />
+  </component>
+</project>

@@ -1,13 +1,6 @@
 version: "3.8"
 
-services:
-  backend:
-    build:
-      args:
-        BUILD_ENVIRONMENT: Development
+services:    
+  db:
     environment:
-      DOTNET_ENVIRONMENT: Development
-      ASPNETCORE_ENVIRONMENT: Development
-    ports:
-      - "5000:5000"
-    
+      POSTGRES_PASSWORD: postgres

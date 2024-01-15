@@ -1,0 +1,110 @@
+@startuml Model
+
+hide empty members
+
+class User << (E,lightblue) entity >> {
+    + Guid Id
+    + string UserName
+    + string Email
+    + string PasswordHash
+    + IEnumerable<Role> Roles
+}
+
+package Model.Base {
+    class Model.Base.GeoLocation << (E,lightblue) entity >> {
+        + Guid Id
+    }
+    ' TODO
+}
+
+package Model.News {
+    ' Optimize location storage for efficient filtering
+    class NewsArticle << (E,lightblue) entity >> {
+        + Guid Id
+        + string Title
+        + string Content
+        + DateTimeOffset CreatedAt
+        + string? SourceLink
+        + GeoLocation? Location
+        + DrawData? DrawData
+        + double Importance
+        + DateTimeOffset? StartTime
+        + DateTimeOffset? EndTime
+        + DateTimeOffset DisappearTime
+        + List<NewsArticleTag> Tags
+    }
+
+    NewsArticle *.. Model.Base.GeoLocation
+    NewsArticleTag "*" ..o "*" NewsArticle
+
+    class NewsArticleTag << (E,lightblue) entity >> {
+        + Guid Id
+        + string Name
+    }
+
+    class NewsUserPreferences << (E,lightblue) entity >> {
+        + Guid Id
+        + User User
+        + List<GeoLocation> PreferredNewsAreas
+        + List<NewsArticleTag> SubscribedTags
+    }
+
+    NewsUserPreferences o.. User
+    NewsUserPreferences *.. Model.Base.GeoLocation
+    NewsUserPreferences o.. NewsArticleTag
+
+    class NewsReadStat << (E,lightblue) entity >> {
+        + Guid Id
+        + User User
+        + NewsArticle Article
+        + TimeSpan ReadDuration
+    }
+
+    NewsReadStat o.. User
+    NewsReadStat o.. NewsArticle
+
+    class TagInterests << (E,lightblue) entity >> {
+        + User User
+        + NewsArticleTag Tag
+        + double Interest
+    }
+
+    TagInterests o.. User
+    TagInterests o.. NewsArticleTag
+}
+
+''' Eco '''
+
+' package Model.Eco {
+'     class UnauthorizedDump << (E,lightblue) entity >> {
+'         + GeoLocation Location
+'         + UnauthorizedDumpProcessingStatus Status
+'         + User? Reporter
+'     }
+
+'     ' TODO
+'     enum UnauthorizedDumpProcessingStatus {
+        
+'     }
+
+'     UnauthorizedDump --> UnauthorizedDumpProcessingStatus
+
+'     class Dump << (E,lightblue) entity >> {
+'         + GeoLocation Location
+'         + bool IsFull
+'     }
+
+'     class RecyclePoint << (E,lightblue) entity >> {
+'         + GeoLocation Location
+'         + RecyclableResource Resource
+'     }
+
+'     enum RecyclableResource << (E,lightblue) entity >> {
+'         Batteries,
+'         Bottles,
+'         Scrap,
+'         ...
+'     }
+' }
+
+@enduml

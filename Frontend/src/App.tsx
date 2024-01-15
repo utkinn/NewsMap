@@ -6,7 +6,7 @@ function App() {
   const [weatherForecast, setWeatherForecast] = useState<string>("Loading...");
 
   useEffect(() => {
-    fetch("/api/WeatherForecast").then(resp => {
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/WeatherForecast`).then(resp => {
       if (resp.ok) {
         resp.text().then(setWeatherForecast);
       } else {
