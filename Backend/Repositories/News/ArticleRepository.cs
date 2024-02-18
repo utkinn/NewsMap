@@ -5,14 +5,11 @@ namespace NewsMap.Repositories.News;
 
 public class ArticleRepository(NewsMapDbContext dbContext)
 {
-	public IEnumerable<Article> GetRelevantAtGivenDay(DateOnly date)
+	public IEnumerable<Article> GetRelevantAtGivenDay(DateTimeOffset dateTimeOffset)
 	{
-		var todayBegin = new DateTimeOffset(date, new TimeOnly(0, 0), TimeSpan.Zero);
-		var todayEnd = new DateTimeOffset(date, new TimeOnly(23, 59), TimeSpan.Zero);
 		return dbContext.Articles
 			.Include(a => a.Tags)
-			.Where(a => a.RelevantTo >= todayBegin && todayEnd >= a.RelevantFrom);
-		// TODO: check Where clause for correctness
+			.Where(a => a.RelevantFrom <= dateTimeOffset && dateTimeOffset <= a.RelevantTo);
 	}
 
 	public IEnumerable<Article> GetPublishedAtGivenDay(DateOnly date)

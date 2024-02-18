@@ -15,7 +15,7 @@ public class ArticleController(
 	[HttpGet("/")]
 	public IEnumerable<ArticleResponse> Get() =>
 		articleRepository
-			.GetRelevantAtGivenDay(DateOnly.FromDateTime(DateTime.Now))
+			.GetRelevantAtGivenDay(DateTimeOffset.UtcNow)
 			.Select(a => new ArticleResponse(a));
 
 	[HttpGet("/for-list")]
