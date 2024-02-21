@@ -13,8 +13,6 @@ public class PostArticleRequestToModelConverter(ArticleTagRepository tagReposito
         DrawData = dto.DrawData,
         Importance = dto.Importance,
         PublishedAt = dto.PublishedAt,
-        RelevantFrom = dto.RelevantFrom,
-        RelevantTo = dto.RelevantTo,
         DisappearsAt = dto.DisappearsAt,
         Tags = (await tagRepository.ListByNamesAndCreateMissingAsync(dto.TagNames)).ToList()
     };

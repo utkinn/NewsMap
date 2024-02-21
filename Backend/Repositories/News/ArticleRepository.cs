@@ -9,7 +9,7 @@ public class ArticleRepository(NewsMapDbContext dbContext)
 	{
 		return dbContext.Articles
 			.Include(a => a.Tags)
-			.Where(a => a.RelevantFrom <= dateTimeOffset && dateTimeOffset <= a.RelevantTo);
+			.Where(a => a.PublishedAt <= dateTimeOffset && dateTimeOffset <= a.DisappearsAt);
 	}
 
 	public IEnumerable<Article> GetPublishedAtGivenDay(DateOnly date)

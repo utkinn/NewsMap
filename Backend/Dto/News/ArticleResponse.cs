@@ -11,8 +11,6 @@ public class ArticleResponse
 	public string DrawData { get; set; }
 	public double Importance { get; set; }
 	public DateTimeOffset PublishedAt { get; set; }
-	public DateTimeOffset? RelevantFrom { get; set; }
-	public DateTimeOffset? RelevantTo { get; set; }
 	public DateTimeOffset DisappearsAt { get; set; }
 	public IEnumerable<ArticleTagResponse> Tags { get; set; }
 
@@ -25,8 +23,6 @@ public class ArticleResponse
 		DrawData = article.DrawData;
 		Importance = article.Importance;
 		PublishedAt = article.PublishedAt;
-		RelevantFrom = article.RelevantFrom;
-		RelevantTo = article.RelevantTo;
 		DisappearsAt = article.DisappearsAt;
 		Tags = article.Tags.Select(t => new ArticleTagResponse(t));
 	}
