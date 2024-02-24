@@ -2,28 +2,15 @@ using NewsMap.Model.News;
 
 namespace NewsMap.Dto.News;
 
-public class ArticleResponse
+public sealed class ArticleResponse(Article article)
 {
-	public int Id { get; init; }
-	public string Title { get; set; }
-	public string Content { get; set; }
-	public string SourceUrl { get; set; }
-	public string DrawData { get; set; }
-	public double Importance { get; set; }
-	public DateTimeOffset PublishedAt { get; set; }
-	public DateTimeOffset DisappearsAt { get; set; }
-	public IEnumerable<ArticleTagResponse> Tags { get; set; }
-
-	public ArticleResponse(Article article)
-	{
-		Id = article.Id;
-		Title = article.Title;
-		Content = article.Content;
-		SourceUrl = article.SourceUrl;
-		DrawData = article.DrawData;
-		Importance = article.Importance;
-		PublishedAt = article.PublishedAt;
-		DisappearsAt = article.DisappearsAt;
-		Tags = article.Tags.Select(t => new ArticleTagResponse(t));
-	}
+	public int Id => article.Id;
+	public string Title => article.Title;
+	public string Content => article.Content;
+	public string SourceUrl => article.SourceUrl;
+	public string DrawData => article.DrawData;
+	public double Importance => article.Importance;
+	public DateTimeOffset PublishedAt => article.PublishedAt;
+	public DateTimeOffset DisappearsAt => article.DisappearsAt;
+	public IEnumerable<ArticleTagResponse> Tags => article.Tags.Select(t => new ArticleTagResponse(t));
 }

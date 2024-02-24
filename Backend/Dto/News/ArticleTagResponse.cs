@@ -2,14 +2,8 @@ using NewsMap.Model.News;
 
 namespace NewsMap.Dto.News;
 
-public class ArticleTagResponse
+public sealed class ArticleTagResponse(ArticleTag tag)
 {
-	public int Id { get; init; }
-	public string Name { get; set; }
-
-	public ArticleTagResponse(ArticleTag tag)
-	{
-		Id = tag.Id;
-		Name = tag.Name;
-	}
+	public int Id => tag.Id;
+	public string Name => tag.Name;
 }
