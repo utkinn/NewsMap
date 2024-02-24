@@ -2,20 +2,21 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using NewsMap.Model;
 
 namespace NewsMap.Auth;
 
 public sealed class JwtGenerator(IOptionsMonitor<JwtOptions> jwtOptions)
 {
-	public string Generate(string email)
+	public string Generate(User user)
 	{
 		var tokenDescriptor = new SecurityTokenDescriptor
 		{
 			Subject = new ClaimsIdentity(new[]
 			{
 				new Claim("Id", Guid.NewGuid().ToString()),
-				new Claim(JwtRegisteredClaimNames.Sub, email),
-				new Claim(JwtRegisteredClaimNames.Email, email),
+				new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+				new Claim(JwtRegisteredClaimNames.Email, user.Email!),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
 			}),
 			Expires = DateTime.UtcNow + jwtOptions.CurrentValue.Lifetime,

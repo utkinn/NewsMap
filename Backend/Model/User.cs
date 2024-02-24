@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace NewsMap.Auth;
+namespace NewsMap.Model;
 
 public sealed class User : IdentityUser
 {

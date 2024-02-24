@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using NewsMap.Model;
 
 namespace NewsMap.Auth;
 
@@ -8,12 +9,11 @@ public static class SignInManagerExtensions
 		this SignInManager<User> signInManager,
 		string email,
 		string password,
-		bool isPersistent,
 		bool lockoutOnFailure)
 	{
 		var byEmail = await signInManager.UserManager.FindByEmailAsync(email);
 		return byEmail == null
 			? SignInResult.Failed
-			: await signInManager.PasswordSignInAsync(byEmail, password, isPersistent, lockoutOnFailure);
+			: await signInManager.CheckPasswordSignInAsync(byEmail, password, lockoutOnFailure);
 	}
 }

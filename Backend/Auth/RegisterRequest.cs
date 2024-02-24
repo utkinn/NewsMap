@@ -1,3 +1,5 @@
+using NewsMap.Model;
+
 namespace NewsMap.Auth;
 
 public sealed class RegisterRequest

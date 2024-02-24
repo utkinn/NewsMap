@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NewsMap.Auth;
+using NewsMap.Model;
 using NewsMap.Model.News;
 
 namespace NewsMap;
