@@ -81,7 +81,10 @@ builder.Services
 
 builder.Services
     .AddDbContext<NewsMapDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Default")))
-    .AddIdentity<IdentityUser, IdentityRole>()
+    .AddIdentity<User, IdentityRole>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+    })
     .AddEntityFrameworkStores<NewsMapDbContext>();
 
 builder.Services.ConfigureApplicationCookie(options =>
