@@ -39,13 +39,28 @@ public sealed class AuthController(
 	[HttpPost("register")]
 	public async Task<IActionResult> Register(RegisterRequest request)
 	{
+		if (await userManager.FindByEmailAsync(request.Email) != null)
+			return Problem(
+				detail: "Учетная запись с этой электронной почтой уже существует. "
+						+ "Если это ваш адрес, попробуйте восстановить пароль.",
+				statusCode: 400,
+				title: "Адрес электронной почты занят");
+
 		var user = request.ToUser();
 		var result = await userManager.CreateAsync(user, request.Password);
 		return result.Succeeded
 			? Content(jwtGenerator.Generate(user))
-			: BadRequest(result.Errors);
+			: ConvertIdentityResultErrorsToProblemDetails(result);
 	}
 
+	private ObjectResult ConvertIdentityResultErrorsToProblemDetails(IdentityResult result)
+	{
+		return Problem(
+			statusCode: 400,
+			title: "Неверные данные",
+			detail: string.Join('\n', result.Errors.Select(e => e.Description)));
+	}
+	
 	[HttpGet("user")]
 	[Authorize]
 	public async Task<UserResponse> GetUser() => new((await userManager.GetUserAsync(User))!);
