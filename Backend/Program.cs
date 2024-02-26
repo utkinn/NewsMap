@@ -1,5 +1,3 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
@@ -88,7 +86,8 @@ builder.Services
 	{
 		options.User.RequireUniqueEmail = true;
 	})
-	.AddEntityFrameworkStores<NewsMapDbContext>();
+	.AddEntityFrameworkStores<NewsMapDbContext>()
+	.AddErrorDescriber<RussianIdentityErrorDescriber>();
 builder.Services.PostConfigure<AuthenticationOptions>(auth =>
 {
 	auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
