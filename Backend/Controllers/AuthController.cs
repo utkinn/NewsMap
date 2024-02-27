@@ -53,6 +53,15 @@ public sealed class AuthController(
 			: ConvertIdentityResultErrorsToProblemDetails(result);
 	}
 
+	[HttpPost("change-password")]
+	[Authorize]
+	public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
+	{
+		var user = await userManager.GetUserAsync(User);
+		var result = await userManager.ChangePasswordAsync(user!, request.CurrentPassword, request.NewPassword);
+		return result.Succeeded ? Ok() : ConvertIdentityResultErrorsToProblemDetails(result);
+	}
+
 	private ObjectResult ConvertIdentityResultErrorsToProblemDetails(IdentityResult result)
 	{
 		return Problem(

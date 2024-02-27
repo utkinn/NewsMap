@@ -20,25 +20,10 @@ public class UserValidator : UserValidator<User>
 		List<IdentityError> errors)
 	{
 		var email = await manager.GetEmailAsync(user);
-		if (string.IsNullOrWhiteSpace(email))
+		if (string.IsNullOrWhiteSpace(email) || !new EmailAddressAttribute().IsValid(email))
 		{
 			errors.Add(Describer.InvalidEmail(email));
-			return errors;
 		}
-
-		if (!new EmailAddressAttribute().IsValid(email))
-		{
-			errors.Add(Describer.InvalidEmail(email));
-			return errors;
-		}
-
-		var existingUserWithEmail = await manager.FindByEmailAsync(email);
-		if (existingUserWithEmail == null)
-			return errors;
-		
-		var existingUserId = await manager.GetUserIdAsync(existingUserWithEmail);
-		if (existingUserId == await manager.GetUserIdAsync(user))
-			errors.Add(Describer.DuplicateEmail(email));
 
 		return errors;
 	}

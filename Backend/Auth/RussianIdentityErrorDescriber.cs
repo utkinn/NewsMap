@@ -45,4 +45,9 @@ public class RussianIdentityErrorDescriber : IdentityErrorDescriber
 			Code = nameof(InvalidEmail),
 			Description = $"Email {email} не является верным."
 		};
+
+	public override IdentityError PasswordMismatch()
+	{
+		return new IdentityError() { Code = nameof(PasswordMismatch), Description = "Неверный пароль." };
+	}
 }
