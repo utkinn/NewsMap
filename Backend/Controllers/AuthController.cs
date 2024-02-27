@@ -57,9 +57,27 @@ public sealed class AuthController(
 	[Authorize]
 	public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
 	{
-		var user = await userManager.GetUserAsync(User);
-		var result = await userManager.ChangePasswordAsync(user!, request.CurrentPassword, request.NewPassword);
+		var user = await GetIdentityUserAsync();
+		if (user == null)
+			return Unauthorized();
+
+		var result = await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
 		return result.Succeeded ? Ok() : ConvertIdentityResultErrorsToProblemDetails(result);
+	}
+
+	[HttpPost("delete-account")]
+	[Authorize]
+	public async Task<IActionResult> DeleteAccount(DeleteAccountRequest request)
+	{
+		var user = await GetIdentityUserAsync();
+		if (user == null)
+			return Unauthorized();
+
+		if (!await userManager.CheckPasswordAsync(user, request.Password))
+			return Problem(statusCode: 400, title: "Неверный пароль", detail: "Вы ввели неверный пароль.");
+
+		await userManager.DeleteAsync(user);
+		return Ok();
 	}
 
 	private ObjectResult ConvertIdentityResultErrorsToProblemDetails(IdentityResult result)
@@ -69,8 +87,17 @@ public sealed class AuthController(
 			title: "Неверные данные",
 			detail: string.Join('\n', result.Errors.Select(e => e.Description)));
 	}
-	
+
 	[HttpGet("user")]
 	[Authorize]
-	public async Task<UserResponse> GetUser() => new((await userManager.GetUserAsync(User))!);
+	public async Task<IActionResult> GetUser()
+	{
+		var user = await GetIdentityUserAsync();
+		if (user == null)
+			return Unauthorized();
+
+		return Ok(new UserResponse(user));
+	}
+
+	private async Task<User?> GetIdentityUserAsync() => await userManager.GetUserAsync(User);
 }
