@@ -5,6 +5,8 @@ namespace NewsMap.Repositories.News;
 
 public class ArticleRepository(NewsMapDbContext dbContext)
 {
+	public ValueTask<Article?> TryGetByIdAsync(int id) => dbContext.Articles.FindAsync(id);
+	
 	public IEnumerable<Article> GetRelevantAtGivenDay(DateTimeOffset dateTimeOffset)
 	{
 		return dbContext.Articles

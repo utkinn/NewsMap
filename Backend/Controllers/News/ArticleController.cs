@@ -10,7 +10,7 @@ namespace NewsMap.Controllers.News;
 [Route("api/articles")]
 public class ArticleController(
 	ArticleRepository articleRepository,
-	PostArticleRequestToModelConverter articleModelConverter)
+	PostArticleRequestToModelConverter articleModelConverter) : ControllerBase
 {
 	[HttpGet("/")]
 	public IEnumerable<ArticleResponse> Get() =>
@@ -18,11 +18,21 @@ public class ArticleController(
 			.GetRelevantAtGivenDay(DateTimeOffset.UtcNow)
 			.Select(a => new ArticleResponse(a));
 
-	[HttpGet("/for-list")]
+	[HttpGet("for-list")]
 	public IEnumerable<ArticleResponse> GetForList(
 		[FromQuery, BindRequired, RegularExpression(@"^\d{4}-\d{2}-\d{2}$")]
 		string date) =>
 		articleRepository.GetPublishedAtGivenDay(DateOnly.Parse(date)).Select(a => new ArticleResponse(a));
+
+	[HttpGet("{id:int}")]
+	public async Task<IActionResult> GetById(int id)
+	{
+		var article = await articleRepository.TryGetByIdAsync(id);
+		if (article == null)
+			return NotFound();
+
+		return Ok(new ArticleResponse(article));
+	}
 
 	[HttpPost("/")]
 	// TODO: Authorize
