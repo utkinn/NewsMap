@@ -12,7 +12,7 @@ public class ArticleController(
 	ArticleRepository articleRepository,
 	PostArticleRequestToModelConverter articleModelConverter) : ControllerBase
 {
-	[HttpGet("/")]
+	[HttpGet]
 	public IEnumerable<ArticleResponse> Get() =>
 		articleRepository
 			.GetRelevantAtGivenDay(DateTimeOffset.UtcNow)
@@ -20,9 +20,14 @@ public class ArticleController(
 
 	[HttpGet("for-list")]
 	public IEnumerable<ArticleResponse> GetForList(
-		[FromQuery, BindRequired, RegularExpression(@"^\d{4}-\d{2}-\d{2}$")]
-		string date) =>
-		articleRepository.GetPublishedAtGivenDay(DateOnly.Parse(date)).Select(a => new ArticleResponse(a));
+		[FromQuery, RegularExpression(@"^\d{4}-\d{2}-\d{2}$")]
+		string? date,
+		[FromQuery(Name = "q")] string? textQuery) =>
+		articleRepository
+			.GetPublishedAtGivenDayAndMatchingTextQuery(
+				DateOnly.Parse(date ?? DateTime.Now.ToString("yyyy-MM-dd")),
+				textQuery)
+			.Select(a => new ArticleResponse(a));
 
 	[HttpGet("{id:int}")]
 	public async Task<IActionResult> GetById(int id)
@@ -34,7 +39,7 @@ public class ArticleController(
 		return Ok(new ArticleResponse(article));
 	}
 
-	[HttpPost("/")]
+	[HttpPost]
 	// TODO: Authorize
 	public async Task Add([FromBody] PostArticleRequest article) =>
 		await articleRepository.AddAsync(await articleModelConverter.ToModelAsync(article));
