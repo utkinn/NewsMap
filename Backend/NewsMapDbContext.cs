@@ -7,6 +7,20 @@ namespace NewsMap;
 
 public class NewsMapDbContext(DbContextOptions<NewsMapDbContext> options) : IdentityDbContext<User>(options)
 {
-    public DbSet<Article> Articles => Set<Article>();
-    public DbSet<ArticleTag> ArticleTags => Set<ArticleTag>();
+	public DbSet<Article> Articles => Set<Article>();
+	public DbSet<ArticleTag> ArticleTags => Set<ArticleTag>();
+
+	protected override void OnModelCreating(ModelBuilder builder)
+	{
+		base.OnModelCreating(builder);
+		
+		builder
+			.Entity<Article>()
+			.HasGeneratedTsVectorColumn(
+				a => a.SearchVector,
+				"russian",
+				a => new { a.Title, a.Content })
+			.HasIndex(a => a.SearchVector)
+			.HasMethod("GIN");
+	}
 }
