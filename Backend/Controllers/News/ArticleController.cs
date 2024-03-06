@@ -13,30 +13,30 @@ public class ArticleController(
 	PostArticleRequestToModelConverter articleModelConverter) : ControllerBase
 {
 	[HttpGet]
-	public IEnumerable<ArticleResponse> Get() =>
+	public Task<IEnumerable<ArticleResponse>> GetAsync() =>
 		articleRepository
-			.GetRelevantAtGivenDay(DateTimeOffset.UtcNow)
+			.GetRelevantAtGivenDayAsync(DateTimeOffset.UtcNow)
 			.Select(a => new ArticleResponse(a));
 
 	[HttpGet("for-list")]
-	public IEnumerable<ArticleResponse> GetForList(
+	public Task<IEnumerable<ArticleResponse>> GetForListAsync(
 		[FromQuery, RegularExpression(@"^\d{4}-\d{2}-\d{2}$")]
-		string? date,
-		[FromQuery(Name = "q")] string? textQuery) =>
+		string? date) =>
 		articleRepository
-			.GetPublishedAtGivenDayAndMatchingTextQuery(
-				DateOnly.Parse(date ?? DateTime.Now.ToString("yyyy-MM-dd")),
-				textQuery)
+			.GetPublishedAtGivenDayAsync(DateOnly.Parse(date ?? DateTime.Now.ToString("yyyy-MM-dd")))
+			.Select(a => new ArticleResponse(a));
+
+	[HttpGet("search")]
+	public Task<IEnumerable<ArticleResponse>> SearchAsync([FromQuery(Name = "q"), BindRequired] string textQuery) =>
+		articleRepository
+			.FullTextSearchAsync(textQuery)
 			.Select(a => new ArticleResponse(a));
 
 	[HttpGet("{id:int}")]
 	public async Task<IActionResult> GetById(int id)
 	{
 		var article = await articleRepository.TryGetByIdAsync(id);
-		if (article == null)
-			return NotFound();
-
-		return Ok(new ArticleResponse(article));
+		return article == null ? NotFound() : Ok(new ArticleResponse(article));
 	}
 
 	[HttpPost]

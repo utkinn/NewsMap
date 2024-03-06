@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using NewsMap.Model.News;
 
 namespace NewsMap.Repositories.News;
@@ -6,30 +7,33 @@ namespace NewsMap.Repositories.News;
 public class ArticleRepository(NewsMapDbContext dbContext)
 {
 	public ValueTask<Article?> TryGetByIdAsync(int id) => dbContext.Articles.FindAsync(id);
-	
-	public IEnumerable<Article> GetRelevantAtGivenDay(DateTimeOffset dateTimeOffset)
+
+	public Task<Article[]> GetRelevantAtGivenDayAsync(
+		DateTimeOffset dateTimeOffset,
+		CancellationToken cancellationToken = default)
 	{
 		return dbContext.Articles
 			.Include(a => a.Tags)
-			.Where(a => a.PublishedAt <= dateTimeOffset && dateTimeOffset <= a.DisappearsAt);
+			.Where(a => a.PublishedAt <= dateTimeOffset && dateTimeOffset <= a.DisappearsAt)
+			.ToArrayAsync(cancellationToken);
 	}
 
-	public IEnumerable<Article> GetPublishedAtGivenDayAndMatchingTextQuery(DateOnly date, string? textQuery)
+	public Task<Article[]> GetPublishedAtGivenDayAsync(DateOnly date, CancellationToken cancellationToken = default)
 	{
 		var todayBegin = new DateTimeOffset(date, new TimeOnly(0, 0), TimeSpan.Zero);
 		var todayEnd = new DateTimeOffset(date, new TimeOnly(23, 59), TimeSpan.Zero);
-		var queryable = dbContext.Articles
-			.Include(a => a.Tags)
-			.Where(a => todayBegin <= a.PublishedAt && a.PublishedAt <= todayEnd);
-
-		if (textQuery != null)
-		{
-			// ReSharper disable once EntityFramework.UnsupportedServerSideFunctionCall
-			queryable = queryable.Where(a => a.SearchVector.Matches(textQuery));
-		}
-
-		return queryable;
+		return ArticlesWithTags
+			.Where(a => todayBegin <= a.PublishedAt && a.PublishedAt <= todayEnd)
+			.ToArrayAsync(cancellationToken);
 	}
+
+	public Task<Article[]> FullTextSearchAsync(string textQuery, CancellationToken cancellationToken = default) =>
+		ArticlesWithTags
+			.Where(a => a.SearchVector.Matches(textQuery))
+			.ToArrayAsync(cancellationToken);
+
+	private IIncludableQueryable<Article, List<ArticleTag>> ArticlesWithTags =>
+		dbContext.Articles.Include(a => a.Tags);
 
 	public async Task AddAsync(Article article)
 	{
