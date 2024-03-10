@@ -18,5 +18,5 @@ public sealed class User : IdentityUser
 
 	public UserNotificationPreferences NotificationPreferences { get; init; }
 
-	public List<UserTopicPreference> TopicPreferences { get; set; }
+	public List<UserTopicPreference> TopicPreferences { get; set; } = [];
 }
