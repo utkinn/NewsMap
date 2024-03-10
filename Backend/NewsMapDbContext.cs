@@ -22,5 +22,11 @@ public class NewsMapDbContext(DbContextOptions<NewsMapDbContext> options) : Iden
 				a => new { a.Title, a.Content })
 			.HasIndex(a => a.SearchVector)
 			.HasMethod("GIN");
+		
+		builder
+			.Entity<UserTopicPreference>()
+			.HasOne(p => p.User)
+			.WithMany(u => u.TopicPreferences)
+			.HasForeignKey(p => p.UserId);
 	}
 }
