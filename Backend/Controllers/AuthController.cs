@@ -88,16 +88,5 @@ public sealed class AuthController(
 			detail: string.Join('\n', result.Errors.Select(e => e.Description)));
 	}
 
-	[HttpGet("user")]
-	[Authorize]
-	public async Task<IActionResult> GetUser()
-	{
-		var user = await GetIdentityUserAsync();
-		if (user == null)
-			return Unauthorized();
-
-		return Ok(new UserResponse(user));
-	}
-
 	private async Task<User?> GetIdentityUserAsync() => await userManager.GetUserAsync(User);
 }
