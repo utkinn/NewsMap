@@ -12,9 +12,9 @@ public sealed class UserTopicPreferencesDto
 			.ToDictionary(g => g.Key, g => g.Select(p => new ArticleTagResponse(p.Tag)));
 		return new UserTopicPreferencesDto
 		{
-			Important = preferencesByType[UserTopicPreferenceType.Important],
-			Interesting = preferencesByType[UserTopicPreferenceType.Interesting],
-			Hidden = preferencesByType[UserTopicPreferenceType.Hidden],
+			Important = preferencesByType.GetValueOrDefault(UserTopicPreferenceType.Important) ?? [],
+			Interesting = preferencesByType.GetValueOrDefault(UserTopicPreferenceType.Interesting) ?? [],
+			Hidden = preferencesByType.GetValueOrDefault(UserTopicPreferenceType.Hidden) ?? [],
 		};
 	}
 
