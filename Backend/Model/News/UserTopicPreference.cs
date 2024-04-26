@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NewsMap.Model.News;
 
-[PrimaryKey(nameof(UserId))]
+[PrimaryKey(nameof(UserId), nameof(TagId))]
 public class UserTopicPreference
 {
 	public string UserId { get; private set; }
