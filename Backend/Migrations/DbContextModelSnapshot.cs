@@ -28,12 +28,12 @@ namespace NewsMap.Migrations
                     b.Property<int>("ArticlesId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("TagsName")
-                        .HasColumnType("text");
+                    b.Property<int>("TagsId")
+                        .HasColumnType("integer");
 
-                    b.HasKey("ArticlesId", "TagsName");
+                    b.HasKey("ArticlesId", "TagsId");
 
-                    b.HasIndex("TagsName");
+                    b.HasIndex("TagsId");
 
                     b.ToTable("ArticleArticleTag");
                 });
@@ -221,10 +221,17 @@ namespace NewsMap.Migrations
 
             modelBuilder.Entity("NewsMap.Model.News.ArticleTag", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Name");
+                    b.HasKey("Id");
 
                     b.ToTable("ArticleTags");
                 });
@@ -256,16 +263,16 @@ namespace NewsMap.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
-                    b.Property<string>("TagName")
-                        .HasColumnType("text");
+                    b.Property<int>("TagId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.HasKey("UserId", "TagName");
+                    b.HasKey("UserId", "TagId");
 
-                    b.HasIndex("TagName");
+                    b.HasIndex("TagId");
 
                     b.ToTable("UserTopicPreference");
                 });
@@ -355,7 +362,7 @@ namespace NewsMap.Migrations
 
                     b.HasOne("NewsMap.Model.News.ArticleTag", null)
                         .WithMany()
-                        .HasForeignKey("TagsName")
+                        .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -426,7 +433,7 @@ namespace NewsMap.Migrations
                 {
                     b.HasOne("NewsMap.Model.News.ArticleTag", "Tag")
                         .WithMany()
-                        .HasForeignKey("TagName")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

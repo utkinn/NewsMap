@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace NewsMap.Model.News;
 
-[PrimaryKey(nameof(UserId), nameof(TagName))]
+[PrimaryKey(nameof(UserId), nameof(TagId))]
 public class UserTopicPreference
 {
 	public string UserId { get; private set; }
 	public required User User { get; init; }
 
-	public string TagName { get; private set; }
+	public int TagId { get; private set; }
 	public required ArticleTag Tag { get; init; }
 
 	[Column(TypeName = "varchar(20)")]
