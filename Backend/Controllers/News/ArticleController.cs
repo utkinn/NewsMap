@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using NewsMap.Auth;
 using NewsMap.Dto.News;
 using NewsMap.Repositories.News;
 
@@ -40,7 +42,7 @@ public class ArticleController(
 	}
 
 	[HttpPost]
-	// TODO: Authorize
+	[Authorize(Roles = Roles.Administrator)]
 	public async Task Add([FromBody] PostArticleRequest article) =>
 		await articleRepository.AddAsync(await articleModelConverter.ToModelAsync(article));
 }
