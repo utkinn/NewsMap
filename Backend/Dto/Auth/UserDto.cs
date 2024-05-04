@@ -30,6 +30,5 @@ public sealed class UserDto
 		user.LastName = LastName;
 		user.Email = Email;
 		user.SubscribedToUpdateNews = SubscribedToUpdateNews;
-		
 	}
 }

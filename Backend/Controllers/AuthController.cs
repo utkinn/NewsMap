@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NewsMap.Auth;
-using NewsMap.Dto;
 using NewsMap.Model;
 
 namespace NewsMap.Controllers;
