@@ -1,10 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using NewsMap.Auth;
 using NewsMap.Model;
 
 namespace NewsMap.Dto.Auth;
 
 public sealed class UserDto
 {
-	public static UserDto FromModel(User user) =>
+	public static async Task<UserDto> FromModelAsync(User user, UserManager<User> userManager) =>
 		new()
 		{
 			FirstName = user.FirstName,
@@ -12,7 +14,8 @@ public sealed class UserDto
 			Email = user.Email!,
 			SubscribedToUpdateNews = user.SubscribedToUpdateNews,
 			Notifications = UserNotificationPreferencesDto.FromModel(user.NotificationPreferences),
-			TopicPreferences = UserTopicPreferencesDto.FromModel(user.TopicPreferences)
+			TopicPreferences = UserTopicPreferencesDto.FromModel(user.TopicPreferences),
+			IsAdmin = await userManager.IsInRoleAsync(user, Roles.Administrator)
 		};
 
 	public string FirstName { get; set; }
@@ -23,6 +26,8 @@ public sealed class UserDto
 	public UserNotificationPreferencesDto Notifications { get; set; }
 
 	public UserTopicPreferencesDto TopicPreferences { get; set; }
+	
+	public bool IsAdmin { get; set; }
 
 	public void UpdateModel(User user)
 	{

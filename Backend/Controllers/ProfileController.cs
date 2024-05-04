@@ -18,7 +18,7 @@ public sealed class ProfileController(UserManager<User> userManager) : Controlle
 		if (user == null)
 			return Unauthorized();
 
-		return Ok(UserDto.FromModel(user));
+		return Ok(await UserDto.FromModelAsync(user, userManager));
 	}
 
 	[HttpPut]
@@ -30,7 +30,7 @@ public sealed class ProfileController(UserManager<User> userManager) : Controlle
 
 		request.UpdateModel(user);
 		await userManager.UpdateAsync(user);
-		return Ok(UserDto.FromModel(user));
+		return Ok(await UserDto.FromModelAsync(user, userManager));
 	}
 	
 	[HttpPost("avatar")]
