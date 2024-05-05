@@ -34,7 +34,7 @@ public sealed class AuthController(
             return Unauthorized();
 
         var user = await userManager.FindByEmailAsync(authRequest.Email);
-        return Content(jwtGenerator.Generate(user!));
+        return Content(await jwtGenerator.GenerateAsync(user!));
     }
 
     [HttpPost("register")]
@@ -50,7 +50,7 @@ public sealed class AuthController(
         var user = request.ToUser();
         var result = await userManager.CreateAsync(user, request.Password);
         return result.Succeeded
-            ? Content(jwtGenerator.Generate(user))
+            ? Content(await jwtGenerator.GenerateAsync(user))
             : ConvertIdentityResultErrorsToProblemDetails(result);
     }
 
