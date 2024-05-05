@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NewsMap.Auth;
 using NewsMap.Dto.News;
-using NewsMap.Model.News;
 using NewsMap.Repositories.News;
 
 namespace NewsMap.Controllers.News;
