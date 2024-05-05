@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using NewsMap.Model.News;
 
 namespace NewsMap.Repositories.News;
@@ -14,4 +15,7 @@ public class ArticleTagRepository(NewsMapDbContext dbContext)
         
         return existingTags.Concat(newTags);
     }
+
+    public async Task<IEnumerable<ArticleTag>> GetByIdsAsync(IEnumerable<int> ids) =>
+        await dbContext.ArticleTags.Where(t => ids.Contains(t.Id)).ToArrayAsync();
 }
