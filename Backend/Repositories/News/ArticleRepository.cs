@@ -17,7 +17,9 @@ public class ArticleRepository(NewsMapDbContext dbContext)
             .Include(a => a.Tags)
             .Where(a => a.PublishedAt <= dateTimeOffset && dateTimeOffset <= a.DisappearsAt);
 
-        if (tagFilter != null)
+        tagFilter = tagFilter?.ToArray() ?? [];
+        
+        if (tagFilter.Any())
         {
             articlesQueryable = articlesQueryable.Where(
                 a => a.Tags

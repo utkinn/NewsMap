@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NewsMap.Auth;
 using NewsMap.Dto.News;
+using NewsMap.Model.News;
 using NewsMap.Repositories.News;
 
 namespace NewsMap.Controllers.News;
@@ -16,13 +17,10 @@ public class ArticleController(
     PostArticleRequestToModelConverter articleModelConverter) : ControllerBase
 {
     [HttpGet]
-    public async Task<IEnumerable<ArticleResponse>> GetAsync([FromQuery] int[]? tagIds)
-    {
-        var tags = tagIds != null ? await articleTagRepository.GetByIdsAsync(tagIds) : null;
-        return await articleRepository
-            .GetRelevantAtGivenDayAsync(DateTimeOffset.UtcNow, tags)
+    public async Task<IEnumerable<ArticleResponse>> GetAsync([FromQuery] int[] tagIds) =>
+        await articleRepository
+            .GetRelevantAtGivenDayAsync(DateTimeOffset.UtcNow, await articleTagRepository.GetByIdsAsync(tagIds))
             .Select(a => new ArticleResponse(a));
-    }
 
     [HttpGet("for-list")]
     public Task<IEnumerable<ArticleResponse>> GetForListAsync(
