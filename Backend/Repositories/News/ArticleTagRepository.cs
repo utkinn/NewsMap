@@ -5,6 +5,8 @@ namespace NewsMap.Repositories.News;
 
 public class ArticleTagRepository(NewsMapDbContext dbContext)
 {
+    public async Task<IEnumerable<ArticleTag>> ListAsync() => await dbContext.ArticleTags.ToArrayAsync();
+    
     public async Task<IEnumerable<ArticleTag>> ListByNamesAndCreateMissingAsync(IEnumerable<string> names)
     {
         var existingTags = dbContext.ArticleTags.Where(t => names.Contains(t.Name)).ToArray();
