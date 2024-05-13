@@ -52,4 +52,10 @@ public class ArticleRepository(NewsMapDbContext dbContext)
         await dbContext.AddAsync(article);
         await dbContext.SaveChangesAsync();
     }
+
+    public async Task DeleteAsync(Article article)
+    {
+        dbContext.Remove(article);
+        await dbContext.SaveChangesAsync();
+    }
 }

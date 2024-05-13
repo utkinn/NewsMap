@@ -46,4 +46,16 @@ public class ArticleController(
     [Authorize(Roles = Roles.Administrator)]
     public async Task Add([FromBody] PostArticleRequest article) =>
         await articleRepository.AddAsync(await articleModelConverter.ToModelAsync(article));
+
+    [HttpDelete("{id:int}")]
+    [Authorize(Roles = Roles.Administrator)]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var article = await articleRepository.TryGetByIdAsync(id);
+        if (article == null)
+            return NotFound();
+
+        await articleRepository.DeleteAsync(article);
+        return Ok();
+    }
 }
