@@ -118,7 +118,7 @@ if (app.Environment.IsDevelopment())
 	app.UseHttpLogging();
 	app.UseSwagger();
 	app.UseSwaggerUI();
-	app.UseCors(policy => policy.AllowAnyOrigin());
+	app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader());
 }
 
 app.UseAuthentication();
