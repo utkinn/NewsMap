@@ -15,7 +15,7 @@ export function useProfile(): [Profile | null, boolean] {
 
     useEffect(() => {
         httpClient
-            .get<Profile>("/api/Profile")
+            .get<Profile>("/Profile")
             .then(p => {
                 setProfile(p.data);
                 setReady(true);
