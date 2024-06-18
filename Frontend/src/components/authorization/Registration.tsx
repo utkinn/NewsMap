@@ -12,11 +12,11 @@ export const Registration = ({setLogIn, close}: {setLogIn: any, close:any})=>{
                 <DialogTitle> Регистрация </DialogTitle>
                 <DialogContent> У вас уже есть учётная запись? <a href="#" onClick={handleClick}>Войдите в неё</a></DialogContent>
             </div>
-            <TextField label="Имя пользователя" variant='outlined' ></TextField>
-            <TextField label="email" variant='outlined' ></TextField>
-            <TextField label="Пароль" type="password" variant='outlined'></TextField>
-            <TextField label="Пароль ещё раз" variant='outlined'></TextField>
-            <button className="auth-button" onClick={close}> Зарегистрироваться </button>
+            <TextField label="Имя пользователя" variant="filled" ></TextField>
+            <TextField label="email" variant="filled" ></TextField>
+            <TextField label="Пароль" type="password" variant="filled"></TextField>
+            <TextField label="Пароль ещё раз" variant="filled"></TextField>
+            <button className="auth-button" onClick={close}> Создать учётную запись </button>
         </div>
     )
 }

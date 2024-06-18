@@ -12,8 +12,8 @@ export const NewsContainer = () => {
         {ActiveArticle ? 
         <div className='news-container'>
             <h2>{ActiveArticle.title}</h2>
-            <img src={""} alt="Упс... Картинка не загрузилась"/>
-            <div>{ActiveArticle.publishedAt.split("T")[0] + " · " + ActiveArticle.sourceUrl}</div>
+            <img src={ActiveArticle.imgUrl} alt="Упс... Картинка не загрузилась"/>
+            <div>{ActiveArticle.publishedAt.split("T")[0] + " · "} <a href={ActiveArticle.sourceUrl}>{new URL(ActiveArticle.sourceUrl).hostname}</a></div>
             <div>{ActiveArticle.content}</div>
             <CloseSvg className='close-icon' onClick={()=> dispatch(setActiveNewsArticle(null))}/>
         </div>

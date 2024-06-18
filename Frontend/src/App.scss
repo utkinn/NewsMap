@@ -1,12 +1,23 @@
 .App {
   text-align: center;
 }
-
+a{
+  color:#006D31
+}
+a:visited{
+  color:#006D31
+}
+a:active{
+  color:#006D31
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
+.auth-dialog{
+  border-radius: 16px;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-float infinite 3s ease-in-out;
@@ -37,3 +48,4 @@
     transform: translateY(0px);
   }
 }
+

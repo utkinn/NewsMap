@@ -12,8 +12,8 @@ export const LogIn = ({setLogIn, close}: {setLogIn: any, close:()=> void})=>{
                 <DialogTitle> Вход </DialogTitle>
                 <DialogContent> У вас ещё нету учётной записи? <a href="#" onClick={handleClick}>Создайте её</a> </DialogContent>
             </div>
-            <TextField label="email" variant='outlined' ></TextField>
-            <TextField label="Пароль" type="password" variant='outlined'></TextField>
+            <TextField label="email" variant="filled" ></TextField>
+            <TextField label="Пароль" type="password" variant="filled"></TextField>
             <button className="auth-button" onClick={close}> Войти</button>
         </div>
     )

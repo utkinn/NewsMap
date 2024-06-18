@@ -1,8 +1,8 @@
 import { YMaps, Map, Clusterer, Placemark } from '@pbe/react-yandex-maps';
 import './newsMap.scss';
-import CultureIcon from '../../icons/culture.svg'
-import AtrractionIcon from '../../icons/Attractions.svg'
-import JKXIcon from '../../icons/JKX.svg'
+import CultureIcon from '../../newsIcons/culture.svg'
+import AtrractionIcon from '../../newsIcons/Attractions.svg'
+import JKXIcon from '../../newsIcons/JKX.svg'
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setActiveNewsArticle } from '../../slices/newsSlece';
 
