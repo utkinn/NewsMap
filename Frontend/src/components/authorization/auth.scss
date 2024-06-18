@@ -1,0 +1,23 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    .text-block *{
+        padding: 0px; 
+        margin-bottom: 5px;    
+    }
+    div {
+        margin-top: 7px;
+    }
+
+    .auth-button {
+        margin-top: 15px;
+        height: 40px;
+        background-color: #006D31;
+        color: white;
+        border-radius: 17px;
+        border-color: #006D31;
+        font-family: "Roboto";
+        font-size: 14px;
+    }
+}

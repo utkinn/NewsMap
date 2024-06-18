@@ -1,0 +1,21 @@
+.news-container{
+    width: 590px;
+    border-radius: 16px;
+    max-height: 840px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 16px;
+    background-color: white;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    left: 65vw;
+    top: 2vh;
+    z-index: 2;
+    .close-icon{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+    }
+}
