@@ -40,7 +40,7 @@ const initialState: newsState = {
         },
         {
             "title": "В Магнитогорске отметили Сабантуй, а главе города подарили лошадь",
-            "content": "Инфа",
+            "content": "Традиционным местом проведения праздника стала южная часть парка У Вечного огня, примыкающая к Центральной городской ярмарке. В этом году организаторам праздника повезло с погодой. Сотни горожан пришли в субботнее жаркое утро в парк, чтобы стать гостями торжества, которое называют праздником плуга. Сабантуй испокон веков проводят в честь окончания весенних полевых работ. К слову, в Магнитогорске праздник с размахом проводят уже 26-й год подряд.",
             "publishedAt": "2024-06-18T16:17:17.208Z",
             "sourceUrl": "https://www.verstov.info/news/dosug/v-magnitogorske-otmetili-sabantuy-a-glave-goroda-podarili-loshad",
             "imgUrl": "",
@@ -91,9 +91,13 @@ export const newsSlice = createSlice({
     reducers: {
         setActiveNewsArticle: (state, action: PayloadAction<NewsArticle | null>) => {
             state.activeNewsArticle = action.payload
+        },
+
+        setNewsArticles: (state, action: PayloadAction<NewsArticle[]>) => {
+            state.newsArticles = action.payload
         }
     }
 })
 
-export const { setActiveNewsArticle } = newsSlice.actions
+export const { setActiveNewsArticle, setNewsArticles } = newsSlice.actions
 export default newsSlice.reducer

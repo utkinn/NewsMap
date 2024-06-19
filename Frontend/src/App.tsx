@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 
 import './App.scss';
@@ -7,6 +7,8 @@ import { Authorization } from './components/authorization/Authorization';
 import { NewsMap } from './components/map/NewsMap';
 import { NewsContainer } from './components/newsContainer/newsContainer';
 import { SearchNewsPanel } from './components/searchNewsPanel/searchNewsPanel';
+import { useAppDispatch } from './app/hooks';
+import { FetchNews } from './actions/newsAction';
 
 function App() {
   const [authOpen, setAuthOpen] = useState(true)
