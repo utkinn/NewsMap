@@ -10,4 +10,4 @@ RUN dotnet publish -c $BUILD_ENVIRONMENT -o out
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=0 /app/out .
-ENTRYPOINT ["dotnet", "Backend.dll"]
+ENTRYPOINT ["dotnet", "NewsMap.dll"]

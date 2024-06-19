@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   frontend:
     build: Frontend
@@ -10,6 +8,8 @@ services:
 
   backend:
     build: Backend
+    environment:
+      DOTNET_Jwt__Key: ${JWT_SECRET}
     
   db:
     image: postgres:alpine
