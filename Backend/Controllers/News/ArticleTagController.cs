@@ -5,7 +5,7 @@ using NewsMap.Repositories.News;
 namespace NewsMap.Controllers.News;
 
 [ApiController]
-[Route("api/article-tags")]
+[Route("article-tags")]
 public sealed class ArticleTagController(ArticleTagRepository articleTagRepository)
 {
     [HttpGet]

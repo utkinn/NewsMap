@@ -9,7 +9,7 @@ using NewsMap.Repositories.News;
 namespace NewsMap.Controllers.News;
 
 [ApiController]
-[Route("api/articles")]
+[Route("articles")]
 public class ArticleController(
     ArticleRepository articleRepository,
     ArticleTagRepository articleTagRepository,
