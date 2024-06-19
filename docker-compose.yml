@@ -10,6 +10,7 @@ services:
     build: Backend
     environment:
       DOTNET_Jwt__Key: ${JWT_SECRET}
+      DOTNET_ConnectionStrings__Default: ${DB_CONNECTION_STRING}
     
   db:
     image: postgres:16-alpine
