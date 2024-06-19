@@ -12,9 +12,10 @@ services:
       DOTNET_Jwt__Key: ${JWT_SECRET}
     
   db:
-    image: postgres:alpine
+    image: postgres:16-alpine
     environment:
       POSTGRES_DB: NewsMap
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - db:/var/lib/postgresql/data
     ports:
