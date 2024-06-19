@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 WORKDIR /app
 
-ARG BUILD_ENVIRONMENT=Release
+ARG BUILD_ENVIRONMENT=Debug
 
 COPY . .
 RUN dotnet restore
