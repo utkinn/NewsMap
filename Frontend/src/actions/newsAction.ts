@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useAppDispatch } from "../app/hooks"
 import { AppDispatch } from "../app/store";
 import { setNewsArticles } from "../slices/newsSlece";
@@ -14,7 +15,8 @@ export const FetchNews= () => async(dispatch: AppDispatch) => {
         const data = await response.json();
         dispatch(setNewsArticles(data))
 
-    } catch(err) {
-        console.log("У нас ошибка начальник", err)
+    } catch(err:any) {
+        console.log(err);
+        //toast.error(err.toString())
     }
 }

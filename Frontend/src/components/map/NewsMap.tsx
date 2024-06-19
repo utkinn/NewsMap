@@ -21,6 +21,7 @@ export const NewsMap = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(FetchNews())
     const fetchInterval = setInterval(() => {
       dispatch(FetchNews())
     }, 10000);
