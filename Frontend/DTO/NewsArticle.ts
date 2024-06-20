@@ -2,8 +2,8 @@ export interface NewsArticle {
     title: string,
     content: string,
     sourceUrl: string,
-    imgUrl: string,
+    imageUrl: string,
     tags: string[],
-    coords: { lat: number, lon: number },
+    coordinates: { lat: number, long: number },
     publishedAt: string
 }

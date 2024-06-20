@@ -16,12 +16,12 @@ public sealed class PostArticleRequest
     /// <summary>
     /// JSON в свободной форме. Используется клиентской частью для отрисовки новости на карте в виде метки или полигона.
     /// </summary>
-    public required string DrawData { get; set; }
+    public string DrawData { get; set; } = "";
 
     public required CoordinatesDto Coordinates { get; set; }
 
     /// <summary>Коэффициент важности новости. Влияет на порядок новости в списке.</summary>
-    public required double Importance { get; set; }
+    public double Importance { get; set; } = 0;
 
     /// <summary>Время публикации новости.</summary>
     public required DateTimeOffset PublishedAt { get; set; }
@@ -29,7 +29,7 @@ public sealed class PostArticleRequest
     /// <summary>
     /// Момент, после которого новость исчезнет с карты и станет доступна только через поиск в списке.
     /// </summary>
-    public required DateTimeOffset DisappearsAt { get; set; }
+    public DateTimeOffset DisappearsAt { get; set; } = DateTimeOffset.Now + TimeSpan.FromDays(30);
 
     /// <summary>
     /// Категории новости, к которым она относится. Новость может относиться к нескольким категориям.

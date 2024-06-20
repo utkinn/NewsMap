@@ -15,8 +15,8 @@ public class PostArticleRequestToModelConverter(ArticleTagRepository tagReposito
         ImageUrl = dto.ImageUrl,
         DrawData = dto.DrawData,
         Importance = dto.Importance,
-        PublishedAt = dto.PublishedAt,
-        DisappearsAt = dto.DisappearsAt,
+        PublishedAt = dto.PublishedAt.UtcDateTime,
+        DisappearsAt = dto.DisappearsAt.UtcDateTime,
         Tags = (await tagRepository.ListByNamesAndCreateMissingAsync(dto.TagNames)).ToList()
     };
 }

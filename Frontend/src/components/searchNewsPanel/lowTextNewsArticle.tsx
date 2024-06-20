@@ -13,7 +13,7 @@ export const LowTextNewsArticle = ({news}: {news: NewsArticle}) => {
                 <div>{news.publishedAt.split("T")[0] + " · "} <a href={news.sourceUrl}>{new URL(news.sourceUrl).hostname}</a></div>
                 <div>{news.content}</div>
             </div>
-            <img alt="Упс... Картинка не загрузилась" src={news.imgUrl}></img>
+            <img alt="Упс... Картинка не загрузилась" src={news.imageUrl}></img>
         </div>
     )
 }

@@ -20,7 +20,7 @@ public sealed class AuthController(
     {
         if (!await userManager.Users.AnyAsync(u => u.Email == "admin@somaps.ru"))
         {
-            var admin = new User { Email = "admin@somaps.ru", FirstName = "", LastName = "" };
+            var admin = new User { Email = "admin@somaps.ru", FirstName = "Иван", LastName = "" };
             await userManager.CreateAsync(admin, "Admin12345!");
             await roleManager.CreateAsync(new IdentityRole(Roles.Administrator));
             await userManager.AddToRoleAsync(admin, Roles.Administrator);
@@ -33,8 +33,8 @@ public sealed class AuthController(
         if (!signInResult.Succeeded)
             return Unauthorized();
 
-        var user = await userManager.FindByEmailAsync(authRequest.Email);
-        return Content(await jwtGenerator.GenerateAsync(user!));
+        var user = await userManager.FindByEmailAsync(authRequest.Email)!;
+        return new JsonResult(new { token = await jwtGenerator.GenerateAsync(user), userName = user.FirstName });
     }
 
     [HttpPost("register")]
@@ -50,7 +50,7 @@ public sealed class AuthController(
         var user = request.ToUser();
         var result = await userManager.CreateAsync(user, request.Password);
         return result.Succeeded
-            ? Content(await jwtGenerator.GenerateAsync(user))
+            ? new JsonResult(new { token = await jwtGenerator.GenerateAsync(user) })
             : ConvertIdentityResultErrorsToProblemDetails(result);
     }
 

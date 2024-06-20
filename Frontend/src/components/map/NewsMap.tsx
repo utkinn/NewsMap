@@ -39,7 +39,7 @@ export const NewsMap = () => {
                         }}
                     >
                         {news.map((elem, index) => (
-                            <Placemark key={index} geometry={[elem.coords.lat, elem.coords.lon]} options={{ iconLayout: "default#image", iconImageSize: [50, 50], iconImageHref: TagsToIcons[elem.tags[0]] }} onClick={() => dispatch(setActiveNewsArticle(elem))} />
+                            <Placemark key={index} geometry={[elem.coordinates.lat, elem.coordinates.long]} options={{ iconLayout: "default#image", iconImageSize: [50, 50], iconImageHref: TagsToIcons[elem.tags[0]] }} onClick={() => dispatch(setActiveNewsArticle(elem))} />
                         ))}
                     </Clusterer>
                 </Map>

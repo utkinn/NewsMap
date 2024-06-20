@@ -14,5 +14,5 @@ public sealed class ArticleResponse(Article article)
     public double Importance => article.Importance;
     public DateTimeOffset PublishedAt => article.PublishedAt;
     public DateTimeOffset DisappearsAt => article.DisappearsAt;
-    public IEnumerable<ArticleTagResponse> Tags => article.Tags.Select(t => new ArticleTagResponse(t));
+    public IEnumerable<string> Tags => article.Tags.Select(t => t.Name);
 }
