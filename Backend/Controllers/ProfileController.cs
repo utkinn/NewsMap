@@ -7,7 +7,7 @@ using NewsMap.Model;
 namespace NewsMap.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public sealed class ProfileController(UserManager<User> userManager) : ControllerBase
 {
 	[HttpGet]

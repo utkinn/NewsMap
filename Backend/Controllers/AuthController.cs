@@ -8,7 +8,7 @@ using NewsMap.Model;
 namespace NewsMap.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public sealed class AuthController(
     SignInManager<User> signInManager,
     UserManager<User> userManager,
