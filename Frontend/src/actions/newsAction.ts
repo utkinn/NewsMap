@@ -6,7 +6,7 @@ import { setNewsArticles } from "../slices/newsSlece";
 
 export const FetchNews= () => async(dispatch: AppDispatch) => {
     try{
-        const response = await fetch('http://localhost:5000/api/articles')
+        const response = await fetch('/api/articles')
         if (!response.ok) {
             throw new Error('В ответе какая-от лажа');
         }

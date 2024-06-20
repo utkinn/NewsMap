@@ -6,7 +6,7 @@ import { login } from "../slices/userSlice";
 export const userLogin = ({email, password, close}: {email: string, password: string, close: () => void}) => async(dispatch: AppDispatch) =>{
     console.log("Мы здесь")
     try{
-        const response = await fetch('http://localhost:5000/api/Auth/login',{
+        const response = await fetch('/api/Auth/login',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export const userLogin = ({email, password, close}: {email: string, password: st
 
 export const userRegistration = ({userName, email, password, close}: {userName: string, email: string, password: string, close: () => void}) => async(dispatch: AppDispatch) =>{
     try{
-        const response = await fetch('http://localhost:5000/api/Auth/register',{
+        const response = await fetch('/api/Auth/register',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
