@@ -11,7 +11,7 @@ public class PostArticleRequestToModelConverter(ArticleTagRepository tagReposito
         Title = dto.Title,
         Content = dto.Content,
         SourceUrl = dto.SourceUrl,
-        Coordinates = new Point(new Coordinate(dto.Coordinates.Lat, dto.Coordinates.Long)),
+        Coordinates = new Point(new Coordinate(dto.Coordinates.Long, dto.Coordinates.Lat)),
         ImageUrl = dto.ImageUrl,
         DrawData = dto.DrawData,
         Importance = dto.Importance,
