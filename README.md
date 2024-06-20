@@ -10,3 +10,5 @@
 2. Чтобы поднять фронт: `cd Frontend && npm start`  
     Чтобы поднять бэк: `cd Backend && dotnet run`  
     Или воспользоваться конфигурациями в VS Code/Rider.
+
+Креды админа: admin@somaps.ru Admin12345!
