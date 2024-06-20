@@ -1,3 +1,4 @@
+using NetTopologySuite.Geometries;
 using NewsMap.Model.News;
 using NewsMap.Repositories.News;
 
@@ -10,6 +11,8 @@ public class PostArticleRequestToModelConverter(ArticleTagRepository tagReposito
         Title = dto.Title,
         Content = dto.Content,
         SourceUrl = dto.SourceUrl,
+        Coordinates = new Point(new Coordinate(dto.Coordinates.Lat, dto.Coordinates.Long)),
+        ImageUrl = dto.ImageUrl,
         DrawData = dto.DrawData,
         Importance = dto.Importance,
         PublishedAt = dto.PublishedAt,
