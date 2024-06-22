@@ -110,12 +110,12 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
+    app.UseSwagger();
+    app.UseSwaggerUI();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseHttpLogging();
-    app.UseSwagger();
-    app.UseSwaggerUI();
     app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader());
 }
 
