@@ -8,6 +8,8 @@ import {NewsContainer} from './components/newsContainer/newsContainer';
 import {SearchNewsPanel} from './components/searchNewsPanel/searchNewsPanel';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { UserPanel } from './components/userPanel/userPanel';
+import { MarkFilter } from './components/markFilter/markFilter';
 
 function App() {
     const [authOpen, setAuthOpen] = useState(true)
@@ -32,6 +34,8 @@ function App() {
             <NewsContainer/>
             <SearchNewsPanel/>
             <NewsMap/>
+            <UserPanel setAuthOpen={setAuthOpen}/>
+            <MarkFilter/>
         </div>
     );
 }

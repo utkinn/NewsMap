@@ -1,7 +1,7 @@
 .news-container{
-    width: 500px;
+    width: 26vw;
     border-radius: 16px;
-    max-height: 840px;
+    max-height: 88vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -21,8 +21,8 @@
         width: 95%;
     }
     img{
-        max-width: 560px;
-        max-height: 310px;
+        max-width: 29vw;
+        max-height: 33vh;
         object-fit: cover;
     }
     .news-text{

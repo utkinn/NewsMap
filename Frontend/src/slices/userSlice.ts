@@ -10,7 +10,7 @@ export interface userState {
   const initialState: userState = {
     logged: false,
     token: null,
-    userName: ""
+    userName: "Ender"
   };
 
 export const userSlice = createSlice({
