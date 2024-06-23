@@ -7,7 +7,10 @@ services:
       - "80:80"
 
   backend:
-    build: Backend
+    build:
+      context: Backend
+      args:
+        - BUILD_ENVIRONMENT=${ENVIRONMENT:-Release}
     environment:
       DOTNET_Jwt__Key: ${JWT_SECRET}
       DOTNET_ConnectionStrings__Default: ${DB_CONNECTION_STRING}
@@ -15,8 +18,9 @@ services:
   db:
     image: postgis/postgis:16-3.4-alpine
     environment:
-      POSTGRES_DB: NewsMap
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db:/var/lib/postgresql/data
     ports:

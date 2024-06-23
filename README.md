@@ -1,14 +1,6 @@
-# Перед запуском
-
-1. Поставьте PowerShell, если еще не.
-2. Запустите `Initialize-JwtKey.ps1`, чтобы сгенерировать секретный ключ, 
-    необходимый для генерации токенов для аутентификации пользователей.
-
 # Запуск
 
-1. Запустите `Start-Dependencies.ps1` для поднятия БД в Docker.
-2. Чтобы поднять фронт: `cd Frontend && npm start`  
-    Чтобы поднять бэк: `cd Backend && dotnet run`  
-    Или воспользоваться конфигурациями в VS Code/Rider.
+1. Поставьте [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.4), Docker и .NET SDK 8.
+2. Запустите `Start-NewsMap.ps1` в PowerShell 7.
 
 Креды админа: admin@somaps.ru Admin12345!
