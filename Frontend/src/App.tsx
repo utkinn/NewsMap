@@ -12,7 +12,7 @@ import { UserPanel } from './components/userPanel/userPanel';
 import { MarkFilter } from './components/markFilter/markFilter';
 
 function App() {
-    const [authOpen, setAuthOpen] = useState(true)
+    const [authOpen, setAuthOpen] = useState(false)
     const handleClose = () => setAuthOpen(false)
     return (
         <div className="App">

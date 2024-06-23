@@ -4,13 +4,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface userState {
     logged: boolean;
     token: null|string;
-    userName: string
+    userName: string;
+    email: string;
   }
   
   const initialState: userState = {
     logged: false,
     token: null,
-    userName: "Ender"
+    userName: "",
+    email: ""
   };
 
 export const userSlice = createSlice({
@@ -21,11 +23,13 @@ export const userSlice = createSlice({
             state.logged = true;
             state.token = action.payload.token;
             state.userName = action.payload.userName;
+            state.email = action.payload.email;
         },
         logout: (state) => {
             state.logged = false;
             state.token = null;
             state.userName = "";
+            state.email = "";
         }
     }
 })

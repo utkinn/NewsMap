@@ -8,7 +8,6 @@ export const userLogin = ({email, password, close}: {
     password: string,
     close: () => void
 }) => async (dispatch: AppDispatch) => {
-    console.log("Мы здесь")
     try {
         const response = await fetch('/api/Auth/login', {
             method: 'POST',
@@ -25,7 +24,7 @@ export const userLogin = ({email, password, close}: {
         }
 
         const data = await response.json();
-        dispatch(login({token: data.token, userName: data.userName}));
+        dispatch(login({token: data.token, userName: data.userName, email: email}));
         close();
     } catch (err: any) {
         toast.error(err.toString())
@@ -62,7 +61,7 @@ export const userRegistration = ({userName, email, password, close}: {
             throw new Error(response.statusText);
         }
         const data = await response.json();
-        dispatch(login({token: data.token, userName: userName}));
+        dispatch(login({token: data.token, userName: userName, email: email}));
         close();
     } catch (err: any) {
         toast.error(err.toString())

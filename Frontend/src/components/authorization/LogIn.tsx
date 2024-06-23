@@ -25,7 +25,7 @@ export const LogIn = ({setLogIn, close}: {setLogIn: any, close:()=> void})=>{
                 <DialogTitle> Вход </DialogTitle>
                 <DialogContent> У вас ещё нету учётной записи? <a href="#" onClick={handleClick}>Создайте её</a> </DialogContent>
             </div>
-            <TextField id='email' onChange={handleChange} label="email" variant="filled" ></TextField>
+            <TextField id='email' onChange={handleChange} label="Email" variant="filled" ></TextField>
             <TextField id='password' onChange={handleChange} label="Пароль" type="password" variant="filled"></TextField>
             <button className="auth-button" onClick={() => {
                 dispatch(userLogin({email, password, close}));

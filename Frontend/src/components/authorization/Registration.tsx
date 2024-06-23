@@ -38,9 +38,9 @@ export const Registration = ({setLogIn, close}: {setLogIn: any, close:any})=>{
                 <DialogContent> У вас уже есть учётная запись? <a href="#" onClick={handleClick}>Войдите в неё</a></DialogContent>
             </div>
             <TextField onChange={handleChange} id='userName' label="Имя пользователя" variant="filled" ></TextField>
-            <TextField onChange={handleChange} id='email' label="email" variant="filled" ></TextField>
+            <TextField onChange={handleChange} id='email' label="Email" variant="filled" ></TextField>
             <TextField onChange={handleChange} id='password' label="Пароль" type="password" variant="filled"></TextField>
-            <TextField onChange={handleChange} id='passwordAgain' label="Пароль ещё раз" variant="filled"></TextField>
+            <TextField onChange={handleChange} id='passwordAgain' label="Пароль ещё раз" type="password" variant="filled"></TextField>
             <button className="auth-button" onClick={()=>{
               dispatch(userRegistration({userName, email, password, close}))  
             }}> Создать учётную запись </button>

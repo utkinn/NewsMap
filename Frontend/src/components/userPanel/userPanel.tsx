@@ -16,10 +16,10 @@ export const UserPanel = ({setAuthOpen}: {setAuthOpen : any}) => {
     return (
         
             <div className="user-panel">
-                {user.logged ? <React.Fragment> <EmptyUserIcon/> <button onClick={() => setAuthOpen(true)}>Войти</button> </React.Fragment> : 
+                {!user.logged ? <React.Fragment> <EmptyUserIcon/> <button onClick={() => setAuthOpen(true)}>Войти</button> </React.Fragment> : 
                 <React.Fragment> <div className="user-panel-info">{user.userName === "Ender" ? <PepeUserIcon/>: <EmptyUserIcon/>} <p>{user.userName}</p></div>  <SettingsIcon className="clickable" onClick={() => setOpenSettings(true)}/> <LogOutIcon className="clickable" onClick={() => dispatch(logout())}/></React.Fragment>}
                 <Dialog open={openSetting} onClose={() => setOpenSettings(false) } PaperProps={{sx: {borderRadius: "16px", background: "#E2E3DE", maxWidth: "none"}}}>
-                    <UserSettings/>
+                    <UserSettings close={setOpenSettings}/>
                 </Dialog>
             </div>
             
