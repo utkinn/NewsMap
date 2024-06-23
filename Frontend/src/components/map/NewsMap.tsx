@@ -41,8 +41,6 @@ export const NewsMap = () => {
     const news = useAppSelector(state => state.news.newsArticles);
     const dispatch = useAppDispatch();
     const filter: FilterType = useAppSelector(state => state.news.filter);
-    //@ts-ignore
-    console.log(JSON.parse(news[2].drawData))
     useEffect(() => {
         dispatch(FetchNews())
         const fetchInterval = setInterval(() => {
