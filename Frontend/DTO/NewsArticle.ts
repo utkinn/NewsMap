@@ -5,5 +5,6 @@ export interface NewsArticle {
     imageUrl: string,
     tags: string[],
     coordinates: { lat: number, long: number },
-    publishedAt: string
+    publishedAt: string,
+    drawData?: string
 }
